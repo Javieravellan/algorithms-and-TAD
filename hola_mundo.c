@@ -15,36 +15,56 @@ void mergesort(double a[], int primero, int ultimo)
 
 void mezcla(double a[], int izq, int medio, int dere)
 {
-    double tmp[M];
-    int x, y, z;
-    x = z = izq;
-    y = medio++;
-
-    // bucle de mezcla usa tmp[] como auxiliar. Z es el indice de tmpA[]
-    while (x<=medio && y<=dere) {
-        if (a[x]<=a[y]) {
-            tmp[z++] = a[x++];
-        } else
-            tmp[z++] = a[y++];
+    int i, j, k;
+    int n1 = medio - izq + 1;
+    int n2 = dere - medio;
+  
+    /* create temp arrays */
+    int L[n1], R[n2];
+  
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = a[izq + i];
+    for (j = 0; j < n2; j++)
+        R[j] = a[medio + 1 + j];
+  
+    /* Merge the temp aays back into a[l..r]*/
+    i = 0; // Initial index of first subaay
+    j = 0; // Initial index of second subaay
+    k = izq; // Initial index of merged subaay
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            a[k] = L[i];
+            i++;
+        }
+        else {
+            a[k] = R[j];
+            j++;
+        }
+        k++;
     }
-
-    // bucles para mover elementos que quedan de sublistas
-    while(x<=medio)
-        tmp[z++] = a[x++];
-    
-    while(y<=dere)
-        tmp[z++] = a[y++];
-
-    // copia los elementos de tmp a a[]
-    for (z =izq; z <= dere; z++) {
-        a[z] = tmp[z];
+  
+    /* Copy the remaining elements of L[], if there
+    are any */
+    while (i < n1) {
+        a[k] = L[i];
+        i++;
+        k++;
+    }
+  
+    /* Copy the remaining elements of R[], if there
+    are any */
+    while (j < n2) {
+        a[k] = R[j];
+        j++;
+        k++;
     }
 }
 
 // function Main
 int main() 
 {
-    double a[M] = {5, 2, 1, 4};
+    double a[] = {5, 2, 1, 4};
     mergesort(a, 0, sizeof(a)/sizeof(a[0]));
     printf("Indice %f", a[0]);
 
