@@ -1,52 +1,60 @@
 #include <stdio.h>
 
-#define M 4
+#define M 3
 void mezcla(double a[], int izq, int medio, int dere);
 void mergesort(double a[], int primero, int ultimo)
 {
-    int central;
     if (primero < ultimo) {
-        central = (primero + ultimo) / 2;
+        int central = (primero + ultimo) / 2;
         mergesort(a, primero, central);
         mergesort(a, central+1, ultimo);
         mezcla(a, primero, central, ultimo);
     }
 }
 
-void mezcla(double a[], int izq, int medio, int dere)
+void mezcla(double a[], int pri, int medio, int ult)
 {
     double tmp[M];
     int x, y, z;
-    x = z = izq;
-    y = medio++;
+    x = z = pri;
+    y = medio+1;
 
     // bucle de mezcla usa tmp[] como auxiliar. Z es el indice de tmpA[]
-    while (x<=medio && y<=dere) {
-        if (a[x]<=a[y]) {
-            tmp[z++] = a[x++];
+    while (x<=medio && y<=ult) {
+        double cx = a[x]; // a[x] actual
+        double cy = a[y]; // a[y] actual
+        // si a[x] es menor que a[y]
+        if (cx<=cy) {
+            tmp[z++] = a[x++]; // ponemos a[x] (a[x] sería el menor) al principio del arreglo.
         } else
-            tmp[z++] = a[y++];
+            tmp[z++] = a[y++]; // si no, ponemos a[y] (a[y] sería el menor) al principio del arreglo.
     }
 
-    // bucles para mover elementos que quedan de sublistas
-    while(x<=medio)
-        tmp[z++] = a[x++];
+    // bucle para mover elementos que quedan de la sublista izquierda.
+    while(x<=medio) {
+        double cx = a[x++];
+        tmp[z++] = cx;
+    }
     
-    while(y<=dere)
-        tmp[z++] = a[y++];
+    // bucle para mover elementos que quedan de la sublista derecha.
+    while(y<=ult) {
+        double cy = a[y++];
+        tmp[z++] = cy;
+    }
 
     // copia los elementos de tmp a a[]
-    for (z =izq; z <= dere; z++) {
+    for (z = pri; z <= ult; z++) {
         a[z] = tmp[z];
     }
 }
 
-// function Main
+// Function Main
 int main() 
 {
-    double a[M] = {5, 2, 1, 4};
-    mergesort(a, 0, sizeof(a)/sizeof(a[0]));
-    printf("Indice %f", a[0]);
+    double a[M] = {5, 2, 1};
+    mergesort(a, 0, sizeof(a)/sizeof(a[0]) - 1);
+    for (int i = 0; i < M; i++)
+        printf("Valor %f\n", a[i]);
 
     return 0;
 }

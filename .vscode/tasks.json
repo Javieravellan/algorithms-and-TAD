@@ -2,8 +2,8 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: clang-10 compilar archivo activo",
-            "command": "/usr/bin/clang-10",
+            "label": "C/C++: gcc compilar archivo activo",
+            "command": "/usr/bin/gcc",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
