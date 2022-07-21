@@ -1,1 +1,4 @@
-/_8reinas
+# archivos sin extensión
+*
+!/**/
+!*.*
