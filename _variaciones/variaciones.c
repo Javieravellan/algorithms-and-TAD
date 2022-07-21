@@ -15,12 +15,16 @@ int v[M];
 void variaciones(int p, int c[]);
 void escribir(int v[]);
 
-// func main
+/**
+ * Func main
+ * Se desea escribir los distintos subconjuntos de n elementos que se 
+ * pueden obtener con un conjunto de m elementos
+*/
 int main() {
     do {
-        printf("\n m = "); // cargar m número de subconjuntos
+        printf("\n m = "); // cargar m = tamaño del subconjunto seleccionado. 
         scanf("%d", &m);
-        printf("\n n = "); // cargar n número de elementos de cada subconjunto. 
+        printf("\n n = "); // cargar n = número de elementos cada subconjunto.
         scanf("%d", &n);
     } while ( m > M || n > m);
     printf("\n \tVariaciones(%d, %d)\n", m, n);
