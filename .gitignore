@@ -5,3 +5,5 @@
 
 # vscode folders
 **/.vscode
+.idea
+out
