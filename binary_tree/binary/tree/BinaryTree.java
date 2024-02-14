@@ -10,6 +10,10 @@ public class BinaryTree<T extends Number> {
     public BinaryTree() {
     }
 
+    public Node<T> getRoot() {
+        return root;
+    }
+
     public void add(T value) {
         root = addRecursive(root, value);
     }
@@ -18,9 +22,37 @@ public class BinaryTree<T extends Number> {
         return containsNodeRecursive(root, value);
     }
 
+    public Node<T> findNode(T value) {
+        return findNodeRecursive(root, value);
+    }
     public void deleteNode(T value) {
         root = deleteRecursive(root, value);
     }
+
+    public void traverseInOrder(Node<T> node) {
+        if ( node != null ) {
+            traverseInOrder(node.getLeft());
+            System.out.println(" " + node.getData().doubleValue());
+            traverseInOrder(node.getRight());
+        }
+    }
+
+    public void traversePostOrder(Node<T> node) {
+        if (node != null) {
+            traversePostOrder(node.getLeft());
+            traversePostOrder(node.getRight());
+            System.out.println(" " + node.getData().doubleValue());
+        }
+    }
+
+    public void traversePreOrder(Node<T> node) {
+        if (node != null) {
+            System.out.println(" " + node.getData().doubleValue());
+            traversePreOrder(node.getLeft());
+            traversePreOrder(node.getRight());
+        }
+    }
+
     private Node<T> addRecursive(Node<T> currentNode, T value) {
         if (currentNode == null) {
             return new Node<T>(value);
@@ -46,12 +78,22 @@ public class BinaryTree<T extends Number> {
                 containsNodeRecursive(current.getLeft(), value) : containsNodeRecursive(current.getRight(), value);
     }
 
+    private Node<T> findNodeRecursive(Node<T> current, T value) {
+        if (current == null) return null;
+
+        if (value.doubleValue() == current.getData().doubleValue()) {
+            return current;
+        }
+
+        return value.doubleValue() < current.getData().doubleValue() ?
+                findNodeRecursive(current.getLeft(), value) : findNodeRecursive(current.getRight(), value);
+    }
+
     private Node<T> deleteRecursive(Node<T> current, T value) {
         if (current == null) {
             return null;
         }
-        System.out.println("Valor a eliminar: " + value.doubleValue());
-        System.out.println("Valor del nodo actual: " + current.getData().doubleValue());
+
         if (value.doubleValue() == current.getData().doubleValue()) {
             // Si es un Nodo hoja
             if (current.getLeft() == null && current.getRight() == null) {
