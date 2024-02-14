@@ -11,11 +11,17 @@ public class Main {
         binaryTree.add(7);
         binaryTree.add(1);
         binaryTree.add(12);
-        binaryTree.add(256);
+        binaryTree.add(254);
 
-        System.out.print("Buscando el value 256, Està dentro del arbol? Respuesta: ");
-        System.out.println(binaryTree.containsNode(256));
+        var findValue = 254;
+        System.out.print("Buscando el value "+ findValue +", Està dentro del arbol? Respuesta: ");
+        System.out.println(binaryTree.containsNode(findValue));
 
+        System.out.println("Eliminar un nodo del àrbol.");
+
+        binaryTree.deleteNode(findValue);
+
+        System.out.printf("Existe el nodo %s: %s %n", findValue, (binaryTree.containsNode(findValue) ? "SI" : "NO") );
         System.out.println("Fin implementaciòn.");
     }
 }
