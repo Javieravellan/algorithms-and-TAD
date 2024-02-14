@@ -9,6 +9,8 @@ public class Main {
         var binaryTree = new BinaryTree<>(5);
         binaryTree.add(6);
         binaryTree.add(7);
+        binaryTree.add(4);
+        binaryTree.add(2);
         binaryTree.add(1);
         binaryTree.add(12);
         binaryTree.add(254);
@@ -21,7 +23,21 @@ public class Main {
 
         binaryTree.deleteNode(findValue);
 
-        System.out.printf("Existe el nodo %s: %s %n", findValue, (binaryTree.containsNode(findValue) ? "SI" : "NO") );
+        // volver a poner el nodo eliminado para buscarlo
+        binaryTree.add(findValue);
+
+        System.out.println("Recorrido inOrder");
+        binaryTree.traverseInOrder(binaryTree.getRoot());
+
+        System.out.println("Recorrido PreOrder");
+        binaryTree.traversePreOrder(binaryTree.getRoot());
+
+        System.out.println("Recarrido PostOrder");
+        binaryTree.traversePostOrder(binaryTree.getRoot());
+
+        System.out.println("Buscar el nodo: " + findValue);
+        System.out.println("Node encontrado: " + binaryTree.findNode(findValue).getData());
+
         System.out.println("Fin implementaciòn.");
     }
 }
